@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import JobListing from "./JobListing";
 import { MoonLoader } from "react-spinners";
 
-export default function JobListings({ isHome }) {
+export default function JobListings({ isHome = false }) {
   // const jobsList = isHome ? jobs.slice(0, 3) : jobs;
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,7 @@ export default function JobListings({ isHome }) {
   useEffect(() => {
     async function fetchJob() {
       try {
-        const res = await fetch("http://localhost:8000/jobs");
+        const res = await fetch("/api/jobs");
         const data = await res.json();
         setJobs(isHome ? data.slice(0, 3) : data);
       } catch (error) {
