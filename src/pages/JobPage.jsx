@@ -24,17 +24,19 @@ export default function JobPage() {
   }, []);
 
   return (
-    <div>
-      {loading ? (
-        <MoonLoader />
-      ) : (
-        <div>
-          <h1>Job Title: {job.title}</h1>
-          <p>Job Type : {job.type}</p>
-          <p>Job Location : {job.location}</p>
-          <p>Job Description : {job.description}</p>
-        </div>
-      )}
-    </div>
+    <section>
+      <div className="max-w-xl m-auto">
+        {loading ? (
+          <MoonLoader />
+        ) : (
+          <div>
+            <h1>Job Title: {job.title}</h1>
+            <p>Job Type : {job.type}</p>
+            <p>Job Location : {job.location}</p>
+            <p>Job Description : {job.description}</p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
