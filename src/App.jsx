@@ -12,6 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import JobPageUsingDataLoader, {
   jobLoader,
 } from "./pages/JobPageUsingDataLoader";
+import AddJobPage from "./pages/AddJobPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         element={<JobPageUsingDataLoader />}
         loader={jobLoader}
       />
+      <Route path="/add-job" element={<AddJobPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>,
   ),
