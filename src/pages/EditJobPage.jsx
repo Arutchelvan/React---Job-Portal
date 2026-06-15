@@ -1,25 +1,31 @@
+import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function AddJobPage({ addJobSubmit }) {
-  const [type, setType] = useState("Full-Time");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [salary, setSalary] = useState("under $50K");
-  const [location, setLocation] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyDescription, setCompanyDescription] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
+export default function EditJobPage({ updateJobSubmit }) {
+  const job = useLoaderData();
+
+  const [type, setType] = useState(job.type);
+  const [title, setTitle] = useState(job.title);
+  const [description, setDescription] = useState(job.description);
+  const [salary, setSalary] = useState(job.salary);
+  const [location, setLocation] = useState(job.location);
+  const [companyName, setCompanyName] = useState(job.company.name);
+  const [companyDescription, setCompanyDescription] = useState(
+    job.company.description,
+  );
+  const [contactEmail, setContactEmail] = useState(job.company.contactEmail);
+  const [contactPhone, setContactPhone] = useState(job.company.contactPhone);
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   function submitForm(e) {
     e.preventDefault();
     console.log(description);
 
-    const newJob = {
+    const updatedJob = {
+      id,
       title,
       type,
       location,
@@ -33,9 +39,9 @@ export default function AddJobPage({ addJobSubmit }) {
       },
     };
 
-    addJobSubmit(newJob);
-    toast.success("Job Added Successfully");
-    return navigate("/jobs");
+    updateJobSubmit(updatedJob);
+    toast.success("Job Updated Successfully");
+    return navigate(`/jobs/${id}`);
   }
 
   return (
